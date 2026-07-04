@@ -53,21 +53,6 @@
 </head>
 <body class="selection:bg-rose selection:text-white pb-32">
 
-    <!-- DEV TOOLS -->
-    <div class="fixed top-0 left-0 bg-stone-800 text-white text-xs p-2 z-50 rounded-br-lg flex gap-4 items-center">
-        <span>Dev Mode:</span>
-        <select id="dev-date-selector" class="bg-stone-700 rounded px-2 py-1 text-white border-none outline-none">
-            <option value="2024-07-04">Before Launch (July 4)</option>
-            <option value="2024-07-05" selected>Launch Day (July 5)</option>
-            <option value="2024-07-06">Day 2 (July 6)</option>
-            <option value="2024-07-08">Mid Week (July 8)</option>
-            <option value="2024-07-11">Full Unlock (July 11)</option>
-        </select>
-        <button id="dev-unlock-btn" class="bg-accent px-2 py-1 rounded hover:bg-opacity-80 transition">
-            Toggle Master Unlock
-        </button>
-    </div>
-
     <!-- MAIN APP CONTAINER -->
     <div id="app-container" class="min-h-screen">
         
@@ -169,7 +154,7 @@
                     </div>
                 </div>
 
-                <!-- VOICE CAPSULES (Stage 2) -->
+                <!-- VOICE CAPSULES (Locked for July 5) -->
                 <div class="w-full max-w-4xl mx-auto my-16 px-6">
                     <div class="flex items-center gap-3 mb-8 justify-center">
                         <i data-lucide="mic" class="text-rose w-7 h-7"></i>
@@ -186,7 +171,7 @@
                     </div>
                 </div>
 
-                <!-- TIMELINE (Unlocks July 6) -->
+                <!-- TIMELINE (Completely hidden on July 5) -->
                 <div id="timeline-section" class="w-full max-w-4xl mx-auto my-16 px-6 animate-fade-in-up hidden">
                     <div class="flex items-center gap-3 mb-8 justify-center">
                         <i data-lucide="calendar-heart" class="text-rose w-7 h-7"></i>
@@ -198,7 +183,7 @@
                     </div>
                 </div>
 
-                <!-- 17 REASONS WHY (Stage 3) -->
+                <!-- 17 REASONS WHY (Locked for July 5) -->
                 <div class="w-full max-w-5xl mx-auto my-24 px-6">
                     <div class="flex items-center gap-3 mb-8 justify-center">
                         <i data-lucide="gift" class="text-rose w-7 h-7"></i>
@@ -224,7 +209,7 @@
                     </div>
                 </div>
 
-                <!-- FINAL LETTER & VIDEO (Stage 3) -->
+                <!-- FINAL LETTER & VIDEO (Hidden for July 5) -->
                 <div id="final-chapter" class="hidden w-full max-w-3xl mx-auto my-24 px-6 space-y-16 animate-fade-in-up">
                     <div class="text-center">
                         <p class="text-sm uppercase tracking-[0.3em] text-accent mb-4">One last thing...</p>
@@ -281,7 +266,7 @@
         </div>
     </div>
 
-    <!-- CUSTOM MESSAGE BOX (Replaces ugly browser alerts) -->
+    <!-- CUSTOM MESSAGE BOX -->
     <div id="custom-msg-box" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-white px-6 py-4 rounded-2xl shadow-xl border border-rose opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-3">
         <i data-lucide="info" class="text-accent w-5 h-5"></i>
         <span id="custom-msg-text" class="text-stone-700 font-medium"></span>
@@ -291,18 +276,17 @@
     <script>
         // ==========================================
         // 🛠️ EDITABLE CONTENT CONFIGURATION
-        // Add all final client assets here
         // ==========================================
         const SITE_CONTENT = {
             global: {
                 title: "Darling's 17",
-                heroImage: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?q=80&w=1000&auto=format&fit=crop", // Placeholder
-                masterPassword: "ILY", // The password revealed on July 10
-                startDate: "2024-07-05", // The day the site goes live
+                heroImage: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?q=80&w=1000&auto=format&fit=crop", 
+                masterPassword: "ILY", 
+                startDate: "2024-07-05", 
             },
             stats: {
-                daysLovedStart: "2022-07-05", // Calculate days from here
-                insideJokes: "420", // Hardcoded per brief, update later
+                daysLovedStart: "2022-07-05", 
+                insideJokes: "420", 
                 argumentsSurvived: "too many",
                 darlingsSaid: "lost count",
             },
@@ -330,15 +314,13 @@
                 { q: "Do you really find me pretty... or do you just say it because you love me?", a: "I wouldn't keep saying it if I didn't mean it. Loving you definitely makes me notice even more beautiful things about you. I genuinely think you're pretty... and there are times when I just sit there smiling at your pictures like an idiot 😭." }
             ],
             musicVault: [
-                // Developer Note: startTime and endTime are in seconds! 
-                // e.g. 1:10 is (1 * 60) + 10 = 70 seconds.
-                { title: "Tere Liye", artist: "Prince / Atif Aslam", note: "This will always be our song. No matter how many songs I discover in the future, I don't think anything will ever replace this one. Every time it plays, it reminds me of us... our conversations, our moments, and everything we've built together.", audioSrc: "tere-liye.mp3" }, // Full song
-                { title: "Pehla Pyaar", artist: "Armaan Malik", note: "I know people have different definitions of first love, but for me, you're mine. You're the first person who made love feel real instead of something I'd only seen in movies.", audioSrc: "pehla-pyaar.mp3", startTime: 70, endTime: 107 }, // 1:10–1:47
-                { title: "Ishq Mubarak", artist: "Arijit Singh", note: "This song wasn't chosen on purpose. It quietly became ours through our happiest moments.", audioSrc: "ishq-mubarak.mp3" }, // Full song
-                { title: "Tum Ho Toh", artist: "Farhan Akhtar", note: "This is how you feel to me. Everything feels lighter when you're around.", audioSrc: "tum-ho-toh.mp3" }, // Full song
-                { title: "Barbaad", artist: "Male Version", note: "If this is what being barbaad feels like, I honestly don't mind it at all.", audioSrc: "barbaad.mp3" }, // Full song
-                { title: "Chaandni", artist: "with Abhijay Sharma", note: "This song feels calm, comforting and beautiful... just like you.", audioSrc: "chaandni.mp3", startTime: 95, endTime: 125 }, // 1:35–2:05
-                { title: "Treat You Better", artist: "Shawn Mendes", note: "I used to sing this when you were in a relationship that wasn't making you happy. Today it feels surreal that I get to be the one loving you.", audioSrc: "treat-you-better.mp3", startTime: 111, endTime: 172 } // 1:51–2:52
+                { title: "Tere Liye", artist: "Prince / Atif Aslam", note: "This will always be our song. No matter how many songs I discover in the future, I don't think anything will ever replace this one. Every time it plays, it reminds me of us... our conversations, our moments, and everything we've built together.", audioSrc: "tere-liye.mp3" },
+                { title: "Pehla Pyaar", artist: "Armaan Malik", note: "I know people have different definitions of first love, but for me, you're mine. You're the first person who made love feel real instead of something I'd only seen in movies.", audioSrc: "pehla-pyaar.mp3", startTime: 70, endTime: 107 }, 
+                { title: "Ishq Mubarak", artist: "Arijit Singh", note: "This song wasn't chosen on purpose. It quietly became ours through our happiest moments.", audioSrc: "ishq-mubarak.mp3" }, 
+                { title: "Tum Ho Toh", artist: "Farhan Akhtar", note: "This is how you feel to me. Everything feels lighter when you're around.", audioSrc: "tum-ho-toh.mp3" }, 
+                { title: "Barbaad", artist: "Male Version", note: "If this is what being barbaad feels like, I honestly don't mind it at all.", audioSrc: "barbaad.mp3" }, 
+                { title: "Chaandni", artist: "with Abhijay Sharma", note: "This song feels calm, comforting and beautiful... just like you.", audioSrc: "chaandni.mp3", startTime: 95, endTime: 125 }, 
+                { title: "Treat You Better", artist: "Shawn Mendes", note: "I used to sing this when you were in a relationship that wasn't making you happy. Today it feels surreal that I get to be the one loving you.", audioSrc: "treat-you-better.mp3", startTime: 111, endTime: 172 }
             ],
             voiceCapsules: [
                 { category: "Sad", title: "When you're feeling down", audioSrc: "" },
@@ -366,10 +348,9 @@
             finalLetter: "My Dearest Darling,\n\nIf you're reading this, you've unlocked everything. You've followed the clues, opened the gifts, and made it to your 17th birthday. I wanted to build you something that would last forever, a place you can always come back to when you want to be reminded of how incredibly loved you are.\n\nYou are my greatest adventure. Happy Birthday, beautiful.\n\nYours always.",
         };
 
-        // State Management
+        // Core State for July 5th Standalone File
         let STATE = {
-            currentDateStr: "2024-07-05",
-            isFullyUnlocked: false,
+            isFullyUnlocked: false, // Remains false until master password is typed
             flippedCount: 0
         };
 
@@ -465,7 +446,7 @@
                 </div>
             `).join('');
 
-            // Populate Voice Capsules
+            // Populate Voice Capsules (Rendered but locked via evaluateState)
             document.getElementById('voice-unlocked').innerHTML = SITE_CONTENT.voiceCapsules.map(cap => `
                 <div class="bg-white p-6 rounded-2xl border border-beige shadow-sm hover:shadow-md transition text-center group cursor-pointer">
                     <div class="w-12 h-12 mx-auto bg-cream rounded-full flex items-center justify-center mb-4 group-hover:bg-rose transition">
@@ -476,7 +457,7 @@
                 </div>
             `).join('');
 
-            // Populate Timeline
+            // Populate Timeline (Rendered but hidden via evaluateState)
             document.getElementById('timeline-container').innerHTML = SITE_CONTENT.timeline.map(event => `
                 <div class="mb-12 ml-8 md:ml-12 relative group">
                     <span class="absolute -left-[41px] md:-left-[57px] top-1 w-5 h-5 rounded-full bg-cream border-2 border-accent group-hover:bg-rose transition"></span>
@@ -496,7 +477,7 @@
                 </div>
             `).join('');
 
-            // Populate Cards
+            // Populate Cards (Rendered but locked via evaluateState)
             document.getElementById('cards-container').innerHTML = SITE_CONTENT.reasons.map((reason, idx) => `
                 <div class="relative w-full h-40 cursor-pointer group perspective" onclick="flipCard(this)">
                     <div class="card-inner w-full h-full transition-transform duration-700 preserve-3d">
@@ -511,27 +492,21 @@
             `).join('');
         };
 
-        // Logic Evaluation based on dates
+        // Logic Evaluation based strictly on July 5 parameters
         const evaluateState = () => {
-            const current = new Date(STATE.currentDateStr);
-            const stage1 = current >= new Date("2024-07-05");
-            const timelineStage = current >= new Date("2024-07-06"); // Hidden on July 5
-            const stage2 = current >= new Date("2024-07-08");
-            const stage3 = STATE.isFullyUnlocked || current >= new Date("2024-07-11");
+            // For this specific july_5.html file, we lock these in:
+            const stage1 = true;         // Site is live
+            const timelineStage = false; // Hidden on July 5
+            const stage2 = false;        // Unlocks July 8
+            const stage3 = STATE.isFullyUnlocked; // False unless they guess the password
 
             const preLaunch = document.getElementById('pre-launch-screen');
             const mainSite = document.getElementById('main-site-content');
             
-            if (!stage1) {
-                preLaunch.classList.remove('hidden');
-                preLaunch.classList.add('flex');
-                mainSite.classList.add('hidden');
-                return;
-            } else {
-                preLaunch.classList.add('hidden');
-                preLaunch.classList.remove('flex');
-                mainSite.classList.remove('hidden');
-            }
+            // Show main site
+            preLaunch.classList.add('hidden');
+            preLaunch.classList.remove('flex');
+            mainSite.classList.remove('hidden');
 
             // Unlocks visibility
             document.getElementById('password-form-container').style.display = stage3 ? 'none' : 'block';
@@ -540,7 +515,7 @@
             document.getElementById('voice-unlocked').style.display = stage2 ? 'grid' : 'none';
             document.getElementById('voice-locked').style.display = stage2 ? 'none' : 'block';
 
-            // Timeline visibility switch
+            // Timeline visibility switch (Off for July 5)
             document.getElementById('timeline-section').style.display = timelineStage ? 'block' : 'none';
 
             document.getElementById('reasons-unlocked').style.display = stage3 ? 'block' : 'none';
@@ -551,7 +526,7 @@
             // Init Icons whenever DOM changes heavily
             lucide.createIcons();
 
-            // Run counters if stage 1 is newly visible
+            // Run counters
             document.querySelectorAll('.stat-num').forEach(el => {
                 const target = parseInt(el.getAttribute('data-val'));
                 animateValue(el, 0, target, 2000);
@@ -567,7 +542,7 @@
             
             // Check if audioSrc is missing
             if (!audioEl.getAttribute('src') || audioEl.getAttribute('src') === "") {
-                showCustomMessage("Please add the .mp3 file for this song in the code first, darling! 🎶");
+                showCustomMessage("Please add the .mp3 file for this song in the folder first, darling! 🎶");
                 return;
             }
 
@@ -585,7 +560,6 @@
 
             // Toggle current audio
             if (audioEl.paused) {
-                // Set start time if it exists and we are at the beginning
                 if (songData.startTime && audioEl.currentTime < songData.startTime) {
                     audioEl.currentTime = songData.startTime;
                 }
@@ -599,17 +573,16 @@
                 currentAudioIdx = null;
             }
             
-            lucide.createIcons(); // refresh icons to show pause/play
+            lucide.createIcons(); 
         };
 
         window.checkAudioTime = (idx) => {
             const audioEl = document.getElementById(`audio-${idx}`);
             const songData = SITE_CONTENT.musicVault[idx];
             
-            // If the song has an end time and hits it, pause and reset!
             if (songData.endTime && audioEl.currentTime >= songData.endTime) {
                 audioEl.pause();
-                audioEl.currentTime = songData.startTime || 0; // reset to start
+                audioEl.currentTime = songData.startTime || 0; 
                 window.audioEnded(idx);
             }
         };
@@ -648,10 +621,8 @@
                 endingScreen.classList.remove('hidden');
                 endingScreen.classList.add('flex');
                 
-                // Fade in background
                 setTimeout(() => endingScreen.classList.remove('opacity-0'), 100);
 
-                // Sequence text
                 setTimeout(() => {
                     const t1 = document.getElementById('end-text-1');
                     t1.classList.remove('opacity-0', 'translate-y-4');
@@ -674,10 +645,10 @@
                     document.getElementById('end-text-4').classList.remove('opacity-0');
                 }, 11000);
 
-            }, 500); // small delay to allow scroll up
+            }, 500); 
         };
 
-        // Event Listeners
+        // Event Listeners (Removed Dev Mode Listeners)
         document.getElementById('password-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const val = document.getElementById('password-input').value;
@@ -687,16 +658,6 @@
             } else {
                 showCustomMessage("Incorrect password, Darling. Keep looking for clues.");
             }
-        });
-
-        document.getElementById('dev-date-selector').addEventListener('change', (e) => {
-            STATE.currentDateStr = e.target.value;
-            evaluateState();
-        });
-
-        document.getElementById('dev-unlock-btn').addEventListener('click', () => {
-            STATE.isFullyUnlocked = !STATE.isFullyUnlocked;
-            evaluateState();
         });
 
         // Initialize App
